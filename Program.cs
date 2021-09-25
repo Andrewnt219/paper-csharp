@@ -1,4 +1,5 @@
 ﻿using System;
+using paper_csharp.modules.cli;
 
 namespace paper_csharp
 {
@@ -6,7 +7,8 @@ namespace paper_csharp
   {
     static void Main(string[] args)
     {
-      Console.WriteLine("Hello World!");
+      ArgsParser parser = new ArgsParser(args);
+      Console.WriteLine($"{parser.DistDirPath} {parser.InputPaths} {parser.StylesheetUrl}");
     }
   }
 }
