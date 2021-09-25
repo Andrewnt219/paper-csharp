@@ -7,8 +7,8 @@ namespace paper_csharp
   {
     static void Main(string[] args)
     {
-      ArgsParser parser = new ArgsParser(args);
-      Console.WriteLine($"{parser.DistDirPath} {parser.InputPaths} {parser.StylesheetUrl}");
+      Generator generator = new Generator(args);
+      generator.Run();
     }
   }
 }
