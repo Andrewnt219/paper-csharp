@@ -34,7 +34,9 @@ namespace paper_csharp.modules.cli
         .ParseArguments<Options>(args)
         .WithParsed<Options>(o =>
         {
-          InputPaths = o.InputPaths;
+          // When it's --help or --version, o.InputPaths is null
+          InputPaths = o.InputPaths ?? Enumerable.Empty<string>();
+
           StylesheetUrl = o.StylesheetUrl;
           DistDirPath = o.DistDirPath;
         });
