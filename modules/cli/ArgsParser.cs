@@ -14,10 +14,10 @@ namespace paper_csharp.modules.cli
     [Option('i', "input", HelpText = "Path to file(s)", Required = true)]
     public IEnumerable<string> InputPaths { get; set; }
 
-    [Option('s', "stylesheet", HelpText = "Path to css file or url", Default = "/assets/style.css")]
+    [Option('s', "stylesheet", HelpText = "Path to css file or url", Default = "./assets/style.css")]
     public string StylesheetUrl { get; set; }
 
-    [Option('o', "output", HelpText = "Path to output directory", Default = "/dist")]
+    [Option('o', "output", HelpText = "Path to output directory", Default = "./dist")]
     public string DistDirPath { get; set; }
 
   }
