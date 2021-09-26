@@ -22,6 +22,7 @@ namespace paper_csharp.modules.cli
     {
       this.CreateDistDir();
       this.GenerateDistFiles();
+      this.GenerateIndexFile();
     }
 
     private void CreateDistDir()
@@ -104,7 +105,40 @@ namespace paper_csharp.modules.cli
       }
 
     }
+
+    private void GenerateIndexFile()
+    {
+      var indexFile = File.Create(Path.Join(Args.DistDirPath, "index.html"));
+
+      var linkList = ReadAllFilePaths(Args.DistDirPath).Select(filePath => $"<a style=\"display:block\" href=\"{filePath}\">{Path.GetFileNameWithoutExtension(filePath)}</a>");
+
+      indexFile.Write(Encoding.ASCII.GetBytes(string.Join("\n", linkList)));
+
+      indexFile.Close();
+      return;
+    }
+
+    private List<string> ReadAllFilePaths(string path)
+    {
+      List<string> paths = new List<string>();
+
+      foreach (string subpath in Directory.GetFileSystemEntries(path))
+      {
+        if (Directory.Exists(subpath))
+        {
+          paths.AddRange(this.ReadAllFilePaths(subpath));
+          continue;
+        }
+
+        if (File.Exists(subpath) && Path.GetExtension(subpath) == ".html" && Path.GetFileName(subpath) != "index.html")
+        {
+          paths.Add(Path.GetRelativePath(Args.DistDirPath, subpath));
+          continue;
+        }
+
+      }
+
+      return paths;
+    }
   }
-
-
 }
