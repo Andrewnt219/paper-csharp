@@ -6,8 +6,10 @@ namespace paper_csharp.modules.file_parser
 {
   public static class TextFile
   {
-    static public ParseResult Parse(List<string> lines)
+    static public ParseResult Parse(string filePath)
     {
+      List<string> lines = File.ReadAllLines(filePath).ToList();
+
       string title = "";
       string body = "";
       ushort blankLineCount = 0;

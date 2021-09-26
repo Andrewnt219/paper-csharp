@@ -1,5 +1,6 @@
 
 
+using System.Text.RegularExpressions;
 using System.Text;
 using System;
 using System.Collections.Generic;
@@ -89,9 +90,8 @@ namespace paper_csharp.modules.cli
 
       try
       {
-        List<string> lines = File.ReadAllLines(filePath).ToList();
-        ParseResult result = TextFile.Parse(lines);
-        string content = HtmlFile.Parse(result);
+        ParseResult parseResult = this.ParseFile(filePath);
+        string content = HtmlFile.Parse(parseResult);
 
         var distPath = Path.Join(Args.DistDirPath, Path.GetDirectoryName(filePath), $"{Path.GetFileNameWithoutExtension(filePath)}.html");
         var htmlFile = File.Create(distPath);
@@ -105,6 +105,30 @@ namespace paper_csharp.modules.cli
       }
 
     }
+
+    private ParseResult ParseFile(string filePath)
+    {
+      ParseResult result;
+
+      switch (Path.GetExtension(filePath))
+      {
+        case ".txt":
+          result = TextFile.Parse(filePath);
+          break;
+
+        case ".md":
+          result = MarkdownFile.Parse(filePath);
+          break;
+
+        default:
+          result = new ParseResult("", "");
+          break;
+      }
+
+      return result;
+    }
+
+
 
     private void GenerateIndexFile()
     {
