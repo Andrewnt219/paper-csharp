@@ -91,7 +91,7 @@ namespace paper_csharp.modules.cli
       try
       {
         ParseResult parseResult = this.ParseFile(filePath);
-        string content = HtmlFile.Parse(parseResult);
+        string content = HtmlFile.Parse(parseResult, new HtmlFileOptions(Args.StylesheetUrl));
 
         var distPath = Path.Join(Args.DistDirPath, Path.GetDirectoryName(filePath), $"{Path.GetFileNameWithoutExtension(filePath)}.html");
         var htmlFile = File.Create(distPath);
