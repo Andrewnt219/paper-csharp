@@ -1,6 +1,3 @@
-
-
-using System.Text.RegularExpressions;
 using System.Text;
 using System;
 using System.Collections.Generic;
@@ -10,8 +7,12 @@ using paper_csharp.modules.file_parser;
 namespace paper_csharp.modules.cli
 {
 
+  /// <summary>
+  ///   Represents the statitc site generator
+  /// </summary>
   public class Generator
   {
+    // Parsed arguments from CLI
     public ArgsParser Args { get; private set; }
 
     public Generator(string[] args)
@@ -19,13 +20,25 @@ namespace paper_csharp.modules.cli
       Args = new ArgsParser(args);
     }
 
+    /// <summary>
+    ///   Start generating dist files
+    /// </summary>
     public void Run()
     {
+      // Don't run on --help or --version
+      if (Args.InputPaths == null)
+      {
+        return;
+      }
+
       this.CreateDistDir();
       this.GenerateDistFiles();
       this.GenerateIndexFile();
     }
 
+    /// <summary>
+    ///   Create the default or custom output directory
+    /// </summary>
     private void CreateDistDir()
     {
       if (Directory.Exists(Args.DistDirPath))
@@ -36,6 +49,10 @@ namespace paper_csharp.modules.cli
       Directory.CreateDirectory(Args.DistDirPath);
     }
 
+
+    /// <summary>
+    ///   Create output files
+    /// </summary>
     private void GenerateDistFiles()
     {
       foreach (string path in Args.InputPaths)
@@ -45,6 +62,9 @@ namespace paper_csharp.modules.cli
 
     }
 
+    /// <summary>
+    ///   Create output files from a path
+    /// </summary>
     private void GenerateDistFromPath(string path)
     {
       if (Directory.Exists(path))
@@ -64,6 +84,9 @@ namespace paper_csharp.modules.cli
       return;
     }
 
+    /// <summary>
+    ///   Create output files from a directory
+    /// </summary>
     private void GenerateDistFromDir(string dirPath)
     {
       if (!Directory.Exists(dirPath))
@@ -81,6 +104,9 @@ namespace paper_csharp.modules.cli
       }
     }
 
+    /// <summary>
+    ///   Create output file from a file
+    /// </summary>
     private void GenerateDistFromFile(string filePath)
     {
       if (!File.Exists(filePath))
@@ -106,6 +132,9 @@ namespace paper_csharp.modules.cli
 
     }
 
+    /// <summary>
+    ///   Parse the content of a file
+    /// </summary>
     private ParseResult ParseFile(string filePath)
     {
       ParseResult result;
@@ -130,6 +159,9 @@ namespace paper_csharp.modules.cli
 
 
 
+    /// <summary>
+    ///   Create the index files with links to all html files in the output directory
+    /// </summary>
     private void GenerateIndexFile()
     {
       var indexFile = File.Create(Path.Join(Args.DistDirPath, "index.html"));
@@ -142,6 +174,9 @@ namespace paper_csharp.modules.cli
       return;
     }
 
+    /// <summary>
+    ///   Returns all paths to .html files
+    /// </summary>
     private List<string> ReadAllFilePaths(string path)
     {
       List<string> paths = new List<string>();

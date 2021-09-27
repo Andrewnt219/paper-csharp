@@ -4,6 +4,9 @@ using System.IO;
 
 namespace paper_csharp.modules.file_parser
 {
+  /// <summary>
+  ///   Represents the parsing options
+  /// </summary>
   public class HtmlFileOptions
   {
     public readonly string StylesheetLink;
@@ -13,9 +16,20 @@ namespace paper_csharp.modules.file_parser
       this.StylesheetLink = stylesheetLink;
     }
   }
+
+  /// <summary>
+  ///   Collections of methods for working with .html
+  /// </summary>
   public static class HtmlFile
   {
+    /// <summary>
+    ///   The default content of pages
+    /// </summary>
     public static readonly string Template = File.ReadAllText("./assets/template.html");
+
+    /// <summary>
+    ///   Parse a content to html content
+    /// </summary>
     static public string Parse(ParseResult parseResult, HtmlFileOptions options)
     {
       string result = Template;
@@ -31,6 +45,9 @@ namespace paper_csharp.modules.file_parser
       return result;
     }
 
+    /// <summary>
+    ///   Parse a stylesheet link to html
+    /// </summary>
     static private string ParseStylesheetLink(string stylesheetLink)
     {
       if (string.IsNullOrWhiteSpace(stylesheetLink))

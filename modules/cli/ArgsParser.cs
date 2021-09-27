@@ -9,6 +9,7 @@ using CommandLine;
 namespace paper_csharp.modules.cli
 {
 
+  // Init available options for CLI
   class Options
   {
     [Option('i', "input", HelpText = "Path to file(s)", Required = true)]
@@ -22,11 +23,25 @@ namespace paper_csharp.modules.cli
 
   }
 
+
+  /// <summary>
+  ///   Represents the parsed arguments from CLI
+  /// </summary>
   public class ArgsParser
   {
+    /// <summary>
+    ///   output directory
+    /// </summary>
     public string DistDirPath { get; private set; }
+    /// <summary>
+    ///   link to stylesheet
+    /// </summary>
     public string StylesheetUrl { get; private set; }
+    /// <summary>
+    ///   input directories/files
+    /// </summary>
     public IEnumerable<string> InputPaths { get; private set; }
+
 
     public ArgsParser(string[] args)
     {
@@ -35,7 +50,7 @@ namespace paper_csharp.modules.cli
         .WithParsed<Options>(o =>
         {
           // When it's --help or --version, o.InputPaths is null
-          InputPaths = o.InputPaths ?? Enumerable.Empty<string>();
+          InputPaths = o.InputPaths;
 
           StylesheetUrl = o.StylesheetUrl;
           DistDirPath = o.DistDirPath;

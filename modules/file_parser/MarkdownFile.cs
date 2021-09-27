@@ -5,8 +5,15 @@ using System.Collections.Generic;
 
 namespace paper_csharp.modules.file_parser
 {
+  /// <summary>
+  ///   A collection of methods to work with .md files
+  /// </summary>
   public static class MarkdownFile
   {
+
+    /// <summary>
+    ///   Parse the content of a file to different sections (parts)
+    /// </summary>
     static public ParseResult Parse(string filePath)
     {
       string fileContent = File.ReadAllText(filePath);
@@ -26,6 +33,9 @@ namespace paper_csharp.modules.file_parser
       return new ParseResult(title, body);
     }
 
+    /// <summary>
+    ///   Parse a markdown element (line) to html
+    /// </summary>
     private static string ParseElement(string element)
     {
 
@@ -36,11 +46,17 @@ namespace paper_csharp.modules.file_parser
       return $"<p>{element}</p>";
     }
 
+    /// <summary>
+    ///   Replace single newlines with space
+    /// </summary>
     private static string ReplaceSingleNewline(string element)
     {
       return Regex.Replace(element, "(\r|\n|\r\n)", " ");
     }
 
+    /// <summary>
+    ///   Parse markdown bold to html
+    /// </summary>
     private static string ParseBoldText(string element)
     {
       // Match anything between two double-asterisk or two double-lodash
