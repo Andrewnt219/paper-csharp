@@ -1,9 +1,5 @@
-using System.Security;
-using System.Globalization;
-using System;
-using System.IO;
+
 using System.Collections.Generic;
-using System.Linq;
 using CommandLine;
 
 namespace paper_csharp.modules.cli
@@ -20,6 +16,9 @@ namespace paper_csharp.modules.cli
 
     [Option('o', "output", HelpText = "Path to output directory", Default = "./dist")]
     public string DistDirPath { get; set; }
+
+    [Option('l', "lang", HelpText = "Locale of generated .html files", Default = "en-CA")]
+    public string Lang { get; set; }
 
   }
 
@@ -41,6 +40,10 @@ namespace paper_csharp.modules.cli
     ///   input directories/files
     /// </summary>
     public IEnumerable<string> InputPaths { get; private set; }
+    /// <summary>
+    ///   The lang of generated .html files
+    /// </summary>
+    public string Lang { get; private set; }
 
 
     public ArgsParser(string[] args)
@@ -54,6 +57,7 @@ namespace paper_csharp.modules.cli
 
           StylesheetUrl = o.StylesheetUrl;
           DistDirPath = o.DistDirPath;
+          Lang = o.Lang;
         });
     }
   }

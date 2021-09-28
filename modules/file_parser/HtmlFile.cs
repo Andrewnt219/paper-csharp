@@ -1,5 +1,4 @@
-using System;
-using System.Runtime.InteropServices;
+using paper_csharp.modules.cli;
 using System.IO;
 
 namespace paper_csharp.modules.file_parser
@@ -10,11 +9,15 @@ namespace paper_csharp.modules.file_parser
   public class HtmlFileOptions
   {
     public readonly string StylesheetLink;
+    public readonly string Lang;
 
-    public HtmlFileOptions(string stylesheetLink)
+    public HtmlFileOptions(string stylesheetLink, string lang)
     {
-      this.StylesheetLink = stylesheetLink;
+      StylesheetLink = stylesheetLink;
+      Lang = lang;
     }
+
+    public HtmlFileOptions(ArgsParser args) : this(args.StylesheetUrl, args.Lang) { }
   }
 
   /// <summary>
@@ -35,12 +38,9 @@ namespace paper_csharp.modules.file_parser
       string result = Template;
 
       result = result.Replace("$TITLE", parseResult.Title);
+      result = result.Replace("$LANG", options.Lang);
+      result = result.Replace("$STYLESHEET_LINK", HtmlFile.ParseStylesheetLink(options.StylesheetLink));
       result = result.Replace("$BODY", parseResult.Body);
-      if (!string.IsNullOrWhiteSpace(options?.StylesheetLink))
-      {
-        result = result.Replace("$STYLESHEET_LINK", HtmlFile.ParseStylesheetLink(options.StylesheetLink));
-
-      }
 
       return result;
     }
@@ -63,5 +63,6 @@ namespace paper_csharp.modules.file_parser
 
       return $"<link rel='stylesheet' href='{stylesheetLink}' />";
     }
+
   }
 }

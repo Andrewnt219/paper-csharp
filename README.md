@@ -19,6 +19,8 @@ $ dotnet run -- --help
 
   -o, --output        (Default: ./dist) Path to output directory
 
+  -l, --lang          (Default: en-CA) Locale of generated .html files
+
   --help              Display this help screen.
 
   --version           Display version information.
@@ -76,4 +78,12 @@ Markdown syntax supports HTML headers bold syntax
 
 ```bash
 $ dotnet run -- -i sample.md -o pages
+```
+
+#### 🌟Pass in lang as an option
+
+Specify the language of generated .html files. Default is en-CA.
+
+```bash
+$ dotnet run -- -i page.txt page.md --lang vi-VN
 ```
