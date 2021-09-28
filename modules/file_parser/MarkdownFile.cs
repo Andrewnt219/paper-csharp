@@ -26,7 +26,6 @@ namespace paper_csharp.modules.file_parser
 
       foreach (string element in elements)
       {
-
         body += MarkdownFile.ParseElement(element);
       }
 
@@ -41,7 +40,7 @@ namespace paper_csharp.modules.file_parser
 
       element = MarkdownFile.ReplaceSingleNewline(element);
       element = MarkdownFile.ParseBoldText(element);
-
+      element = MarkdownFile.ParseHorizontalLine(element);
 
       return $"<p>{element}</p>";
     }
@@ -55,7 +54,7 @@ namespace paper_csharp.modules.file_parser
     }
 
     /// <summary>
-    ///   Parse markdown bold to html
+    ///   Parse markdown bold to tag `strong`
     /// </summary>
     private static string ParseBoldText(string element)
     {
@@ -64,6 +63,18 @@ namespace paper_csharp.modules.file_parser
       string boldReplacement = "<strong>$1</strong>";
 
       return Regex.Replace(element, boldPattern, boldReplacement);
+    }
+
+    /// <summary>
+    ///   Parse markdown --- to tag `hr`
+    /// </summary>
+    private static string ParseHorizontalLine(string element)
+    {
+      // Match if --- is the only chars in the line
+      string hrPattern = @"^---$";
+      string hrReplacement = "<hr />";
+
+      return Regex.Replace(element, hrPattern, hrReplacement);
     }
   }
 }

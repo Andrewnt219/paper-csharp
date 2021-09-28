@@ -74,7 +74,11 @@ Specify a different output directory, default is `dist`
 
 #### 🎉 Parse Markdown files
 
-Markdown syntax supports HTML headers bold syntax
+Markdown syntax supported:
+
+- bold text \*\*bold\*\*
+
+- hr \-\-\-
 
 ```bash
 $ dotnet run -- -i sample.md -o pages
