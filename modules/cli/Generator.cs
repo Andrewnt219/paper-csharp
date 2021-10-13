@@ -13,11 +13,11 @@ namespace paper_csharp.modules.cli
   public class Generator
   {
     // Parsed arguments from CLI
-    public ArgsParser Args { get; private set; }
+    public CliArgs Args { get; private set; }
 
     public Generator(string[] args)
     {
-      Args = new ArgsParser(args);
+      Args = CliArgs.Parse(args);
     }
 
     /// <summary>
@@ -26,7 +26,7 @@ namespace paper_csharp.modules.cli
     public void Run()
     {
       // Don't run on --help or --version
-      if (Args.InputPaths == null)
+      if (Args == null)
       {
         return;
       }
@@ -94,7 +94,6 @@ namespace paper_csharp.modules.cli
         return;
       }
 
-
       Directory.CreateDirectory(Path.Join(Args.DistDirPath, dirPath));
 
       string[] subpaths = Directory.GetFileSystemEntries(dirPath);
@@ -157,47 +156,13 @@ namespace paper_csharp.modules.cli
       return result;
     }
 
-
-
     /// <summary>
     ///   Create the index files with links to all html files in the output directory
     /// </summary>
     private void GenerateIndexFile()
     {
-      var indexFile = File.Create(Path.Join(Args.DistDirPath, "index.html"));
-
-      var linkList = ReadAllFilePaths(Args.DistDirPath).Select(filePath => $"<a style=\"display:block\" href=\"{filePath}\">{Path.GetFileNameWithoutExtension(filePath)}</a>");
-
-      indexFile.Write(Encoding.ASCII.GetBytes(string.Join("\n", linkList)));
-
-      indexFile.Close();
-      return;
-    }
-
-    /// <summary>
-    ///   Returns all paths to .html files
-    /// </summary>
-    private List<string> ReadAllFilePaths(string path)
-    {
-      List<string> paths = new List<string>();
-
-      foreach (string subpath in Directory.GetFileSystemEntries(path))
-      {
-        if (Directory.Exists(subpath))
-        {
-          paths.AddRange(this.ReadAllFilePaths(subpath));
-          continue;
-        }
-
-        if (File.Exists(subpath) && Path.GetExtension(subpath) == ".html" && Path.GetFileName(subpath) != "index.html")
-        {
-          paths.Add(Path.GetRelativePath(Args.DistDirPath, subpath));
-          continue;
-        }
-
-      }
-
-      return paths;
+      IndexFile indexFile = new IndexFile(Args.DistDirPath);
+      indexFile.Generate();
     }
   }
 }

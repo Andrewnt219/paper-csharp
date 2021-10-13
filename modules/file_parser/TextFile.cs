@@ -29,7 +29,7 @@ namespace paper_csharp.modules.file_parser
         {
           title += line;
         }
-        // If the 2nd and 3rd lines are blank then 1st line will be a title
+        // If the 2nd and 3rd line are blank then 1st line will be a title
         else if (string.IsNullOrWhiteSpace(line) && i <= 2)
         {
           blankLineCount++;

@@ -17,7 +17,7 @@ namespace paper_csharp.modules.file_parser
       Lang = lang;
     }
 
-    public HtmlFileOptions(ArgsParser args) : this(args.StylesheetUrl, args.Lang) { }
+    public HtmlFileOptions(CliArgs args) : this(args.StylesheetUrl, args.Lang) { }
   }
 
   /// <summary>
