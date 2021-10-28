@@ -1,0 +1,22 @@
+{
+  "name": "paper-csharp",
+  "version": "1.0.0",
+  "description": "Static site generator (SSG) made with [.NET](https://dotnet.microsoft.com/).",
+  "main": "index.js",
+  "scripts": {
+    "predev": "dotnet run -- -i sample -o dist",
+    "dev": "vite dist",
+    "build": "dotnet run -- -i sample -o build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andrewnt219/paper-csharp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Andrewnt219/paper-csharp/issues"
+  },
+  "homepage": "https://paper-csharp.vercel.app/"
+}
