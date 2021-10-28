@@ -1,9 +1,8 @@
 using System.Text;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.IO;
 using paper_csharp.modules.file_parser;
+using paper_csharp.modules.utils;
 namespace paper_csharp.modules.cli
 {
 
@@ -14,6 +13,7 @@ namespace paper_csharp.modules.cli
   {
     // Parsed arguments from CLI
     public CliArgs Args { get; private set; }
+    public static string sourceStaticDir = @"static";
 
     public Generator(string[] args)
     {
@@ -34,6 +34,7 @@ namespace paper_csharp.modules.cli
       this.CreateDistDir();
       this.GenerateDistFiles();
       this.GenerateIndexFile();
+      this.GenerateStaticFiles();
     }
 
     /// <summary>
@@ -41,12 +42,7 @@ namespace paper_csharp.modules.cli
     /// </summary>
     private void CreateDistDir()
     {
-      if (Directory.Exists(Args.DistDirPath))
-      {
-        Directory.Delete(Args.DistDirPath, true);
-      }
-
-      Directory.CreateDirectory(Args.DistDirPath);
+      DirectoryUtils.CreateDirForce(Args.DistDirPath);
     }
 
 
@@ -163,6 +159,13 @@ namespace paper_csharp.modules.cli
     {
       IndexFile indexFile = new IndexFile(Args.DistDirPath);
       indexFile.Generate();
+    }
+
+    private void GenerateStaticFiles()
+    {
+      DirectoryInfo dir = DirectoryUtils.CreateDirSoft(Generator.sourceStaticDir);
+
+      DirectoryUtils.DirectoryCopy(dir.ToString(), Path.Combine(Args.DistDirPath, dir.ToString()), true);
     }
   }
 }
