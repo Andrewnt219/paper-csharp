@@ -20,7 +20,7 @@ namespace paper_csharp.modules.file_parser
 
       string title = Path.GetFileNameWithoutExtension(filePath);
       // Rewrite static asssets
-      string body = Markdown.ToHtml(Regex.Replace(fileContent, staticAssetPatter, "![$1](/$2)"));
+      string body = Markdown.ToHtml(Regex.Replace(fileContent, staticAssetPatter, "![$1](/static/$2)"));
 
       return new ParseResult(title, body);
     }
