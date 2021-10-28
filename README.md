@@ -28,7 +28,7 @@ $ dotnet run -- --help
 
 ## Implemented optional features
 
-#### 🎉 Generate `index.html`
+#### 🌟 Generate `index.html`
 
 The index file includes paths to all the generated html files (recursively)
 
@@ -44,7 +44,7 @@ Content of `.css` files are bundled into all the generated `.html` files
 $ dotnet run -- -i page.txt --stylesheet ./my-style.css
 ```
 
-#### 🎉 Keep source folder structure
+#### 🌟 Keep source folder structure
 
 If a directory is passed as `--input`, `dist` keeps the structure of the source dir
 
@@ -72,7 +72,7 @@ Title is the first line of the file, followed by 2 empty lines
 
 Specify a different output directory, default is `dist`
 
-#### 🎉 Parse Markdown files
+#### 🌟 Parse Markdown files
 
 Markdown syntax supported:
 
@@ -84,10 +84,22 @@ Markdown syntax supported:
 $ dotnet run -- -i sample.md -o pages
 ```
 
-#### 🌟Pass in lang as an option
+#### 🌟 Pass in lang as an option
 
 Specify the language of generated .html files. Default is en-CA.
 
 ```bash
 $ dotnet run -- -i page.txt page.md --lang vi-VN
+```
+
+#### 🎉Support static images
+
+Demo: [https://paper-csharp.vercel.app/sample/markdown/Gallery.html](https://paper-csharp.vercel.app/sample/markdown/Gallery.html)
+
+Source file: [Gallery.md](https://github.com/Andrewnt219/paper-csharp/blob/master/sample/markdown/Gallery.md)
+
+Place your images in `static` folder and refer to them in markdowns
+
+```md
+[unsplash 2021 collection](unsplash-2021-collection.jpg)
 ```
