@@ -102,9 +102,9 @@ namespace paper_csharp.modules.file_parser
       string imgPattern = @"\[(?<alt>.*)\]\((?<src>.*)\)";
       var match = Regex.Match(Element, imgPattern);
 
-      if (match != null)
+      if (match.Success)
       {
-        Element = $"<img alt=\"{match.Groups["alt"]}\" src=\"{match.Groups["src"]}\" />";
+        Element = $"<img style=\"width:100%\" alt=\"{match.Groups["alt"]}\" src=\"/static/{match.Groups["src"]}\" />";
       }
 
       return this;
