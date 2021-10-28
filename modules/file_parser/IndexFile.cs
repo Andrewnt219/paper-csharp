@@ -29,7 +29,7 @@ namespace paper_csharp.modules.file_parser
     {
       var indexFile = File.Create(Path.Join(this.SourceDirPath, "index.html"));
 
-      var linkList = ReadAllFilePaths(this.SourceDirPath).Select(filePath => $"<a style=\"display:block\" href=\"{filePath}\">{Path.GetFileNameWithoutExtension(filePath)}</a>");
+      var linkList = ReadAllFilePaths(this.SourceDirPath).Select(filePath => $"<a style=\"display:block\" href=\"{filePath}\">{filePath}</a>");
 
       indexFile.Write(Encoding.ASCII.GetBytes(string.Join("\n", linkList)));
 
