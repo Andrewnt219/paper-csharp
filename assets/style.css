@@ -6,3 +6,7 @@ h1 {
 p {
   margin-bottom: 1rem;
 }
+
+img {
+  width: 100%;
+}
