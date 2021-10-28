@@ -1,3 +1,4 @@
+using System;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.IO;
@@ -20,7 +21,6 @@ namespace paper_csharp.modules.file_parser
 
       string title = Path.GetFileNameWithoutExtension(filePath);
       string body = "";
-
       // Separates elements by double newline
       IEnumerable<string> elements = Regex.Split(fileContent, "(\r\r|\n\n|\r\n\r\n)").Where(str => !string.IsNullOrWhiteSpace(str));
 
@@ -37,44 +37,77 @@ namespace paper_csharp.modules.file_parser
     /// </summary>
     private static string ParseElement(string element)
     {
+      MarkdownParser parser = new MarkdownParser(element);
 
-      element = MarkdownFile.ReplaceSingleNewline(element);
-      element = MarkdownFile.ParseBoldText(element);
-      element = MarkdownFile.ParseHorizontalLine(element);
+      parser.ReplaceSingleNewline().ParseBoldText().ParseHorizontalLine().ParseImage();
 
-      return $"<p>{element}</p>";
+      return $"<p>{parser.Element}</p>";
+    }
+
+
+  }
+
+  public class MarkdownParser
+  {
+    public string Element;
+
+    public MarkdownParser(string element)
+    {
+      Element = element;
     }
 
     /// <summary>
     ///   Replace single newlines with space
     /// </summary>
-    private static string ReplaceSingleNewline(string element)
+    public MarkdownParser ReplaceSingleNewline()
     {
-      return Regex.Replace(element, "(\r|\n|\r\n)", " ");
+      Element = Regex.Replace(Element, "(\r|\n|\r\n)", " ");
+
+      return this;
     }
 
     /// <summary>
     ///   Parse markdown bold to tag `strong`
     /// </summary>
-    private static string ParseBoldText(string element)
+    public MarkdownParser ParseBoldText()
     {
       // Match anything between two double-asterisk or two double-lodash
       string boldPattern = @"\*{2}(.*?)\*{2}|_{2}(.*?)_{2}";
       string boldReplacement = "<strong>$1</strong>";
 
-      return Regex.Replace(element, boldPattern, boldReplacement);
+      Element = Regex.Replace(Element, boldPattern, boldReplacement);
+
+      return this;
     }
 
     /// <summary>
     ///   Parse markdown --- to tag `hr`
     /// </summary>
-    private static string ParseHorizontalLine(string element)
+    public MarkdownParser ParseHorizontalLine()
     {
       // Match if --- is the only chars in the line
       string hrPattern = @"^---$";
       string hrReplacement = "<hr />";
 
-      return Regex.Replace(element, hrPattern, hrReplacement);
+      Element = Regex.Replace(Element, hrPattern, hrReplacement);
+
+      return this;
+    }
+
+    /// <summary>
+    ///   Parse markdown [alt](src) to tag `img`
+    /// </summary>
+    public MarkdownParser ParseImage()
+    {
+      string imgPattern = @"\[(?<alt>.*)\]\((?<src>.*)\)";
+      var match = Regex.Match(Element, imgPattern);
+
+      if (match != null)
+      {
+        Element = $"<img alt=\"{match.Groups["alt"]}\" src=\"{match.Groups["src"]}\" />";
+      }
+
+      return this;
     }
   }
 }
