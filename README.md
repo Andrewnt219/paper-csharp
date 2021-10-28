@@ -101,5 +101,5 @@ Source file: [Gallery.md](https://github.com/Andrewnt219/paper-csharp/blob/maste
 Place your images in `static` folder and refer to them in markdowns
 
 ```md
-[unsplash 2021 collection](unsplash-2021-collection.jpg)
+![unsplash 2021 collection](unsplash-2021-collection.jpg)
 ```
