@@ -2,13 +2,7 @@
 
 Static site generator (SSG) made with [.NET](https://dotnet.microsoft.com/).
 
-Sample website: [https://paper-csharp-sample.vercel.app/](https://paper-sample.vercel.app/)
-
-To start running:
-
-1. [Install .NET](https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net50)
-
-2. Run
+Sample website: [https://paper-csharp-sample.vercel.app/](https://paper-csharp.vercel.app/)
 
 ```bash
 $ dotnet run -- --help
@@ -26,7 +20,7 @@ $ dotnet run -- --help
   --version           Display version information.
 ```
 
-## Implemented optional features
+## Features
 
 #### 🌟 Generate `index.html`
 

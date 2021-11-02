@@ -4,9 +4,13 @@
   "description": "Static site generator (SSG) made with [.NET](https://dotnet.microsoft.com/).",
   "main": "index.js",
   "scripts": {
+    "setup": "dotnet tool restore",
     "predev": "dotnet run -- -i sample -o dist",
     "dev": "vite dist",
-    "build": "dotnet run -- -i sample -o build"
+    "build": "dotnet run -- -i sample -o build",
+    "format": "dotnet format -v q",
+    "prepare": "husky install",
+    "pre-commit": "npm run format && dotnet build"
   },
   "repository": {
     "type": "git",
@@ -18,5 +22,10 @@
   "bugs": {
     "url": "https://github.com/Andrewnt219/paper-csharp/issues"
   },
-  "homepage": "https://paper-csharp.vercel.app/"
+  "homepage": "https://paper-csharp.vercel.app/",
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "vite": "^2.6.13"
+  }
 }
