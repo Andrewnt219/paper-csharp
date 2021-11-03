@@ -97,3 +97,7 @@ Place your images in `static` folder and refer to them in markdowns
 ```md
 ![unsplash 2021 collection](unsplash-2021-collection.jpg)
 ```
+
+## Contributing
+
+For collaboration, see [CONTRIBUTING.md](CONTRIBUTING.md)
