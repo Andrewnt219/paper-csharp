@@ -1,39 +1,27 @@
-using paper_csharp.modules.cli;
-using System.IO;
+// <copyright file="HtmlFile.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace paper_csharp.modules.file_parser
+namespace Paper_csharp.Modules.File_parser
 {
-  /// <summary>
-  ///   Represents the parsing options
-  /// </summary>
-  public class HtmlFileOptions
-  {
-    public readonly string StylesheetLink;
-    public readonly string Lang;
-
-    public HtmlFileOptions(string stylesheetLink, string lang)
-    {
-      StylesheetLink = stylesheetLink;
-      Lang = lang;
-    }
-
-    public HtmlFileOptions(CliArgs args) : this(args.StylesheetUrl, args.Lang) { }
-  }
+  using System.IO;
+  using Paper_csharp.Modules.Cli;
 
   /// <summary>
-  ///   Collections of methods for working with .html
+  ///   Collections of methods for working with .html.
   /// </summary>
   public static class HtmlFile
   {
     /// <summary>
-    ///   The default content of pages
+    ///   The default content of pages.
     /// </summary>
     public static readonly string Template = File.ReadAllText("./assets/template.html");
 
     /// <summary>
-    ///   Parse a content to html content
+    ///   Parse a content to html content.
     /// </summary>
-    static public string Parse(ParseResult parseResult, HtmlFileOptions options)
+    /// <returns></returns>
+    public static string Parse(ParseResult parseResult, HtmlFileOptions options)
     {
       string result = Template;
 
@@ -46,13 +34,13 @@ namespace paper_csharp.modules.file_parser
     }
 
     /// <summary>
-    ///   Parse a stylesheet link to html
+    ///   Parse a stylesheet link to html.
     /// </summary>
-    static private string ParseStylesheetLink(string stylesheetLink)
+    private static string ParseStylesheetLink(string stylesheetLink)
     {
       if (string.IsNullOrWhiteSpace(stylesheetLink))
       {
-        return "";
+        return string.Empty;
       }
 
       if (File.Exists(stylesheetLink))
@@ -63,6 +51,25 @@ namespace paper_csharp.modules.file_parser
 
       return $"<link rel='stylesheet' href='{stylesheetLink}' />";
     }
+  }
 
+  /// <summary>
+  ///   Represents the parsing options.
+  /// </summary>
+  public class HtmlFileOptions
+  {
+    public readonly string StylesheetLink;
+    public readonly string Lang;
+
+    public HtmlFileOptions(string stylesheetLink, string lang)
+    {
+      this.StylesheetLink = stylesheetLink;
+      this.Lang = lang;
+    }
+
+    public HtmlFileOptions(CliArgs args)
+      : this(args.StylesheetUrl, args.Lang)
+    {
+    }
   }
 }

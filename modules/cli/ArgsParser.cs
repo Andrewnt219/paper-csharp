@@ -1,10 +1,12 @@
+// <copyright file="ArgsParser.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-using System;
-using System.Collections.Generic;
-using CommandLine;
-
-namespace paper_csharp.modules.cli
+namespace Paper_csharp.Modules.Cli
 {
+  using System;
+  using System.Collections.Generic;
+  using CommandLine;
 
   // Init available options for CLI
   public class CliArgs

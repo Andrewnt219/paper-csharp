@@ -1,11 +1,13 @@
-using System.IO;
+// <copyright file="DirectoryUtils.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-
-namespace paper_csharp.modules.utils
+namespace Paper_csharp.Modules.Utils
 {
+  using System.IO;
+
   public class DirectoryUtils
   {
-
     // Overwrite or create a new directory at path
     public static DirectoryInfo CreateDirForce(string path)
     {
@@ -44,7 +46,7 @@ namespace paper_csharp.modules.utils
 
       DirectoryInfo[] dirs = dir.GetDirectories();
 
-      // If the destination directory doesn't exist, create it.       
+      // If the destination directory doesn't exist, create it.
       Directory.CreateDirectory(destDirName);
 
       // Get the files in the directory and copy them to the new location.
@@ -66,5 +68,4 @@ namespace paper_csharp.modules.utils
       }
     }
   }
-
 }

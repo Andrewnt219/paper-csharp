@@ -1,11 +1,15 @@
-﻿using System;
-using paper_csharp.modules.cli;
+﻿// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace paper_csharp
+namespace Paper_csharp
 {
-  class Program
+  using System;
+  using Paper_csharp.Modules.Cli;
+
+  internal class Program
   {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
       Generator generator = new Generator(args);
       generator.Run();
