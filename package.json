@@ -14,7 +14,7 @@
     "pre-commit": "npx lint-staged --relative && npm run lint"
   },
   "lint-staged": {
-    "*.cs": "dotnet format --include"
+    "*.cs": "dotnet format -a warn --include"
   },
   "repository": {
     "type": "git",
