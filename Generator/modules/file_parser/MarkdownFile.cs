@@ -17,12 +17,13 @@ namespace Paper_csharp.Modules.File_parser
     ///   Parse the content of a file to different sections (parts).
     /// </summary>
     /// <returns></returns>
-    public static ParseResult Parse(string filePath)
+    public static ParseResult Parse(string filePathOrContent)
     {
-      string fileContent = File.ReadAllText(filePath);
+      string fileContent = File.Exists(filePathOrContent) ? File.ReadAllText(filePathOrContent) : filePathOrContent;
+
       string staticAssetPatter = @"!\[(.*)\]\((.*)\)";
 
-      string title = Path.GetFileNameWithoutExtension(filePath);
+      string title = Path.GetFileNameWithoutExtension(filePathOrContent);
 
       // Rewrite static asssets
       string body = Markdown.ToHtml(Regex.Replace(fileContent, staticAssetPatter, "![$1](/static/$2)"));

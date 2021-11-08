@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "setup": "dotnet tool restore",
-    "predev": "dotnet run -- -i sample -o dist",
-    "dev": "vite dist",
-    "build": "dotnet run -- -i sample -o build",
+    "predev": "cd Generator && dotnet run -- -i sample -o dist",
+    "dev": "cd Generator && vite dist",
+    "build": "cd Generator && dotnet run -- -i sample -o build",
     "format": "dotnet format -v q",
     "lint": "dotnet build",
+    "lint:fix": "dotnet format -a warn",
+    "test": "dotnet test Generator.Tests",
+    "test:filter": "yarn test --filter",
     "prepare": "husky install",
     "pre-commit": "npx lint-staged --relative && npm run lint"
   },

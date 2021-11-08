@@ -17,9 +17,9 @@ namespace Paper_csharp.Modules.File_parser
     ///   Parse the content of file to sections/parts.
     /// </summary>
     /// <returns></returns>
-    public static ParseResult Parse(string filePath)
+    public static ParseResult Parse(string filePathOrContent)
     {
-      List<string> lines = File.ReadAllLines(filePath).ToList();
+      List<string> lines = File.Exists(filePathOrContent) ? File.ReadAllLines(filePathOrContent).ToList() : filePathOrContent.Split('\n').ToList();
 
       string title = string.Empty;
       string body = string.Empty;
