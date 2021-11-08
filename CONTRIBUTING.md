@@ -5,13 +5,13 @@
 2. Install dependencies
 
 ```bash
-$ yarn
+yarn
 ```
 
 3. Install toolings
 
 ```bash
-$ yarn setup
+yarn setup
 ```
 
 ### Console development
@@ -19,7 +19,7 @@ $ yarn setup
 Run in debug mode (F5) to automatically generate output in `dist`. By default, the program run with these arguments
 
 ```bash
-$ dotnet run -- -i sample
+dotnet run -- -i sample
 ```
 
 You can customize this by editing `configurations.args` inside file `.vscode/launch.json`.
@@ -29,7 +29,7 @@ You can customize this by editing `configurations.args` inside file `.vscode/lau
 To see website generated from `dist`, run
 
 ```bash
-$ yarn dev
+yarn dev
 ```
 
 ### Project structure
@@ -54,11 +54,29 @@ $ yarn dev
 ### Formatting
 
 ```bash
-$ yarn format
+yarn format
 ```
 
 ### Linting
 
 ```bash
-$ yarn lint
+yarn lint
+```
+
+### Testing
+
+To run all tests
+
+```bash
+yarn test
+```
+
+To run specific tests
+
+```bash
+# Run all tests inside GeneratorTesters
+yarn test:filter GeneratorTester
+
+# Run all tests include the text 'RunWith'
+yarn test:filter RunWith
 ```
