@@ -1,4 +1,4 @@
-// <copyright file="ArgsParser.cs" company="PlaceholderCompany">
+// <copyright file="CliParser.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -14,7 +14,7 @@ namespace Paper_csharp.Modules.Cli
     [Option('i', "input", HelpText = "Path to file(s)", Required = true)]
     public IEnumerable<string> InputPaths { get; set; }
 
-    [Option('s', "stylesheet", HelpText = "Path to css file or url", Default = "./assets/style.css")]
+    [Option('s', "stylesheet", HelpText = "Path to css file or url", Default = "")]
     public string StylesheetUrl { get; set; }
 
     [Option('o', "output", HelpText = "Path to output directory", Default = "./dist")]

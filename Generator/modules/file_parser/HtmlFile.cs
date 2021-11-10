@@ -2,9 +2,15 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+// <copyright file="HtmlFile.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 namespace Paper_csharp.Modules.File_parser
 {
   using System.IO;
+  using System.Reflection;
+  using System.Runtime.InteropServices;
+  using System.Text;
   using Paper_csharp.Modules.Cli;
 
   /// <summary>
@@ -13,17 +19,34 @@ namespace Paper_csharp.Modules.File_parser
   public static class HtmlFile
   {
     /// <summary>
-    ///   The default content of pages.
-    /// </summary>
-    public static readonly string Template = File.ReadAllText("./assets/template.html");
-
-    /// <summary>
     ///   Parse a content to html content.
     /// </summary>
     /// <returns></returns>
     public static string Parse(ParseResult parseResult, HtmlFileOptions options)
     {
-      string result = Template;
+      string result = @"
+        <!DOCTYPE html>
+        <html lang='$LANG'>
+          <head>
+            <meta charset='UTF-8' />
+            <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+            <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+            <link
+              rel='stylesheet'
+              href='https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.4.x/dist/typography.min.css'
+            />
+            <link
+              href='https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css'
+              rel='stylesheet'
+            />
+            $STYLESHEET_LINK
+            <title>$TITLE</title>
+          </head>
+          <body class='prose mx-auto max-w-prose'>
+            $BODY
+          </body>
+        </html>
+      ";
 
       result = result.Replace("$TITLE", parseResult.Title);
       result = result.Replace("$LANG", options.Lang);

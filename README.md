@@ -9,7 +9,7 @@ $ dotnet run -- --help
 
   -i, --input         Required. Path to file(s)
 
-  -s, --stylesheet    (Default: ./assets/style.css) Path to css file or url
+  -s, --stylesheet    Path to css file or url
 
   -o, --output        (Default: ./dist) Path to output directory
 
