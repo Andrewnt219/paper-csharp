@@ -47,7 +47,7 @@ namespace Paper_csharp.Modules.Cli
     /// </summary>
     private void CreateDistDir()
     {
-      DirectoryUtils.CreateDirForce("build");
+      DirectoryUtils.CreateDirForce(this.Args.DistDirPath);
     }
 
     /// <summary>
