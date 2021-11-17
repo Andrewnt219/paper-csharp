@@ -50,6 +50,18 @@ namespace Generator.Tests
     }
 
     [TestMethod]
+    public void RunWithSingleFile()
+    {
+      string content = File.ReadAllText(this.txtFilePath);
+      string[] args = { "-i", this.txtFilePath, "-o", this.distPath, "-s", this.styleSheetUrl };
+      var generator = new Generator(args);
+      generator.Run();
+
+      Assert.IsTrue(Directory.Exists(this.distPath));
+      Assert.IsTrue(File.Exists(this.txtFileDistPath));
+    }
+
+    [TestMethod]
     public void RunWithMultipleFiles()
     {
       string content = File.ReadAllText(this.txtFilePath);
