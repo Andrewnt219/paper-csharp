@@ -1,14 +1,16 @@
 ### Set up dev environment
 
-1. [Install .NET Core for Visual Studio Code](https://code.visualstudio.com/docs/languages/dotnet)
+1. [Install .NET SDK 6](https://dotnet.microsoft.com/download/dotnet/6.0)
 
-2. Install dependencies
+2. [Install .NET Core Runtime 5](https://dotnet.microsoft.com/download/dotnet/5.0)
+
+3. Install dependencies
 
 ```bash
 yarn
 ```
 
-3. Install toolings
+4. Install toolings
 
 ```bash
 yarn setup
@@ -16,13 +18,13 @@ yarn setup
 
 ### Console development
 
-Run in debug mode (F5) to automatically generate output in `dist`. By default, the program run with these arguments
+Console app is located at "/Generator"
 
 ```bash
+cd ./Generator
+
 dotnet run -- -i sample
 ```
-
-You can customize this by editing `configurations.args` inside file `.vscode/launch.json`.
 
 ### Frontend development
 
