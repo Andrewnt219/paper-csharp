@@ -61,5 +61,25 @@ namespace Generator.Tests
       Assert.IsTrue(File.Exists(this.txtFileDistPath));
       Assert.IsTrue(File.Exists(this.mdFileDistPath));
     }
+
+    public void RunWithNoInputFile()
+    {
+      string[] args = { "-i", "-o", this.distPath };
+      var generator = new Generator(args);
+      generator.Run();
+
+      Assert.IsFalse(Directory.Exists(this.distPath));
+    }
+
+    public void RunOnADirectory()
+    {
+      string[] args = { "-i", this.distPath, "-o", this.distPath, "-s", this.styleSheetUrl };
+      var generator = new Generator(args);
+      generator.Run();
+
+      Assert.IsTrue(Directory.Exists(this.distPath));
+      Assert.IsTrue(File.Exists(this.txtFileDistPath));
+      Assert.IsTrue(File.Exists(this.mdFileDistPath));
+    }
   }
 }
