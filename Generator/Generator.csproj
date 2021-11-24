@@ -1,13 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>paper_csharp</RootNamespace>
+    <PackageId>andrewnt219.paper</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Andrew Nguyen</Authors>
+    <Company>Seneca College</Company>
+    <Product>Paper</Product>
+    <Description>Static site generator (SSG) made with .NET</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Andrewnt219/paper-csharp</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <!-- <TreatWarningsAsErrors>true</TreatWarningsAsErrors> -->
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.9.0-preview1"/>
-    <PackageReference Include="Markdig" Version="0.26.0"/>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354"/>
+    <PackageReference Include="CommandLineParser" Version="2.9.0-preview1" />
+    <PackageReference Include="Markdig" Version="0.26.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354" />
   </ItemGroup>
 </Project>

@@ -4,8 +4,39 @@ Static site generator (SSG) made with [.NET](https://dotnet.microsoft.com/).
 
 Sample website: [https://paper-csharp-sample.vercel.app/](https://paper-csharp.vercel.app/)
 
+## Using as a nuget
+
+Install from nuget: [https://www.nuget.org/account/Packages](https://www.nuget.org/account/Packages)
+
+Usage:
+
+```csharp
+using Paper_csharp.Modules.Cli;
+namespace Test
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Generator generator = new Generator(args);
+            generator.Run();
+        }
+    }
+}
+
+```
+
+## Using as a console app
+
+1. Install your version of OS from [Release](https://github.com/Andrewnt219/paper-csharp/releases)
+2. Unzip the console app
+3. Run the executable file
+
+- Window: .exe
+- Linux/Mac: (no extension)
+
 ```bash
-$ dotnet run -- --help
+$ ./Generator.exe --help
 
   -i, --input         Required. Path to file(s)
 
@@ -27,7 +58,7 @@ $ dotnet run -- --help
 The index file includes paths to all the generated html files (recursively)
 
 ```bash
-$ dotnet run -- -i dir-with-nested-dirs-and-files
+$ ./Generator.exe -i dir-with-nested-dirs-and-files
 ```
 
 #### 🌟 Pass in stylesheet's file OR url as a CLI arg
@@ -35,7 +66,7 @@ $ dotnet run -- -i dir-with-nested-dirs-and-files
 Content of `.css` files are bundled into all the generated `.html` files
 
 ```bash
-$ dotnet run -- -i page.txt --stylesheet ./my-style.css
+$ ./Generator.exe -i page.txt --stylesheet ./my-style.css
 ```
 
 #### 🌟 Keep source folder structure
@@ -43,7 +74,7 @@ $ dotnet run -- -i page.txt --stylesheet ./my-style.css
 If a directory is passed as `--input`, `dist` keeps the structure of the source dir
 
 ```bash
-$ donet run -- -i sample-dir
+$ ./Generator.exe -i sample-dir
 
 ├── sample-dir
 ├── Cargo.toml

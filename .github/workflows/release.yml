@@ -1,10 +1,13 @@
-name: dotnet package
-
-on: [push, pull_request]
-
+name: publish to nuget
+on:
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NUGET_API_KEY: ${{secrets.NUGET_API_KEY}}
     strategy:
       matrix:
         dotnet-version: ['5.0.x']
@@ -21,3 +24,10 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Test
         run: dotnet test --no-restore --verbosity normal
+      - name: Publish NuGet
+        uses: brandedoutcast/publish-nuget@v2.5.5
+        with:
+          PROJECT_FILE_PATH: Generator/Generator.csproj
+          PACKAGE_NAME: andrewnt219.paper
+          VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
