@@ -6,7 +6,7 @@ Sample website: [https://paper-csharp-sample.vercel.app/](https://paper-csharp.v
 
 ## Using as a nuget
 
-Install from nuget: [https://www.nuget.org/account/Packages](https://www.nuget.org/account/Packages)
+Install from nuget: [https://www.nuget.org/packages/andrewnt219.paper/](https://www.nuget.org/packages/andrewnt219.paper/)
 
 Usage:
 
